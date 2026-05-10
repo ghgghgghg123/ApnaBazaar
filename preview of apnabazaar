@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApnaBazaar | Local Indian Auctions</title>
+    <style>
+        :root {
+            --primary: #2563eb; /* Modern Blue */
+            --secondary: #10b981; /* Startup Green */
+            --accent: #f59e0b; /* Attention Orange */
+            --whatsapp: #25D366; /* WhatsApp Green */
+        }
+
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; }
+
+        /* Modern Header */
+        header { background: var(--primary); color: white; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 32px; letter-spacing: -1px; }
+        header p { margin: 5px 0 0; opacity: 0.9; font-weight: 300; }
+
+        .container { display: flex; justify-content: center; padding: 40px 20px; }
+
+        /* The Auction Card */
+        .card { background: white; width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden; }
+        .image-container { position: relative; height: 280px; background: #ddd url('https://images.unsplash.com/photo-1605898393850-2f22e84d1685?auto=format&fit=crop&q=80&w=500') center/cover; }
+        .badge { position: absolute; top: 15px; left: 15px; background: var(--accent); color: white; padding: 5px 12px; border-radius: 50px; font-weight: bold; font-size: 12px; text-transform: uppercase; }
+
+        .content { padding: 25px; }
+        h2 { margin: 0; font-size: 22px; color: #1f2937; }
+        .location { font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+
+        /* Pricing Section */
+        .price-section { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .price-box { background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .price-label { font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold; }
+        .price-value { font-size: 20px; font-weight: 800; color: #1e293b; }
+
+        /* Action Buttons */
+        input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
+        input:focus { border-color: var(--primary); outline: none; }
+
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: transform 0.2s, opacity 0.3s; font-size: 16px; }
+        .btn:active { transform: scale(0.98); }
+
+        .btn-bid { background: var(--primary); color: white; }
+        .btn-buy { background: var(--secondary); color: white; }
+        .btn-whatsapp { background: var(--whatsapp); color: white; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+        
+        .timer { text-align: center; font-size: 13px; color: #ef4444; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛍️ ApnaBazaar</h1>
+    <p>Direct from Local Sellers • Secure Bidding • Instant Chat</p>
+</header>
+
+<div class="container">
+    <div class="card">
+        <div class="image-container">
+            <span class="badge">Hot Item 🔥</span>
+        </div>
+        
+        <div class="content">
+            <h2>Cricket Bat (English Willow) - Signed</h2>
+            <p class="location">📍 Sector 62, Noida, UP</p>
+
+            <div class="price-section">
+                <div class="price-box">
+                    <p class="price-label">Current Bid</p>
+                    <div class="price-value" id="currentBid">₹4,200</div>
+                </div>
+                <div class="price-box">
+                    <p class="price-label">Fixed Rate</p>
+                    <div class="price-value">₹6,500</div>
+                </div>
+            </div>
+
+            <!-- Bidding Logic -->
+            <input type="number" id="userBid" placeholder="Enter ₹4,300 or more">
+            <button class="btn btn-bid" onclick="placeBid()">Place Auction Bid</button>
+            
+            <!-- Buy Now Logic -->
+            <button class="btn btn-buy" onclick="buyNow()">Buy Now (Fixed Rate)</button>
+            
+            <!-- WhatsApp Logic -->
+            <a href="https://wa.me/919999999999?text=I'm%20interested%20in%20the%20Cricket%20Bat" class="btn btn-whatsapp" target="_blank">
+                💬 Chat with Seller on WhatsApp
+            </a>
+
+            <div class="timer">⌛ Ends in: 04h 22m 10s</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function placeBid() {
+        const bid = document.getElementById('userBid').value;
+        if(bid >= 4300) {
+            document.getElementById('currentBid').innerText = "₹" + bid;
+            alert("🔥 Amazing! You are now the leading bidder at ₹" + bid);
+        } else {
+            alert("❌ Bid too low! You need to offer at least ₹4,300.");
+        }
+    }
+
+    function buyNow() {
+        alert("✅ Order Placed! The seller has been notified. Please contact them on WhatsApp to arrange delivery.");
+    }
+</script>
+
+</body>
+</html>
